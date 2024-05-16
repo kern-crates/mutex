@@ -6,7 +6,7 @@ extern crate alloc;
 //use alloc::vec;
 
 use core::panic::PanicInfo;
-//use axtype::{align_up_4k, align_down_4k, phys_to_virt, virt_to_phys};
+use axtype::{align_up_4k, align_down_4k, phys_to_virt, virt_to_phys};
 use mutex::Mutex;
 
 /// Entry
@@ -22,6 +22,7 @@ pub extern "Rust" fn runtime_main(_cpu_id: usize, _dtb_pa: usize) {
 
     {
         let mutex: Mutex<u32> = Mutex::new(0);
+        // Todo: do some tests according tests below.
     }
 
     info!("[rt_mutex]: ok!");

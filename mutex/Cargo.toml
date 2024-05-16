@@ -7,5 +7,5 @@ description = "ArceOS synchronization primitives"
 license = "GPL-3.0-or-later OR Apache-2.0"
 
 [dependencies]
-taskctx = { path = "../taskctx" }
-wait_queue = { path = "../wait_queue" }
+taskctx = { git = "ssh://git@github.com/shilei-massclouds/taskctx.git" }
+wait_queue = { git = "ssh://git@github.com/shilei-massclouds/wait_queue.git" }
