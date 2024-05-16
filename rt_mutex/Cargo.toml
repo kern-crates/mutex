@@ -11,3 +11,5 @@ mutex = { git = "ssh://git@github.com/shilei-massclouds/mutex.git" }
 axalloc = { git = "ssh://git@github.com/shilei-massclouds/axalloc.git" }
 axlog = { git = "ssh://git@github.com/shilei-massclouds/axlog.git" }
 hal_base = { git = "ssh://git@github.com/shilei-massclouds/hal_base.git" }
+taskctx = { git = "ssh://git@github.com/shilei-massclouds/taskctx.git" }
+run_queue = { git = "ssh://git@github.com/shilei-massclouds/run_queue.git" }
