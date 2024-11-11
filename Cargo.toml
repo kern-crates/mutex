@@ -1,0 +1,9 @@
+[workspace]
+resolver = "2"
+members = [
+    "mutex",
+    "rt_mutex",
+]
+
+[profile.release]
+lto = true

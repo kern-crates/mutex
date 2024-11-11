@@ -1,10 +1,9 @@
 #![no_std]
+#![no_main]
 
 #[macro_use]
 extern crate axlog2;
 extern crate alloc;
-use alloc::sync::Arc;
-//use alloc::vec;
 
 use core::panic::PanicInfo;
 use axtype::{align_up_4k, align_down_4k, phys_to_virt, virt_to_phys};
@@ -12,34 +11,29 @@ use mutex::Mutex;
 
 /// Entry
 #[no_mangle]
-pub extern "Rust" fn runtime_main(cpu_id: usize, _dtb_pa: usize) {
+pub extern "Rust" fn runtime_main(cpu_id: usize, dtb_pa: usize) {
     axhal::cpu::init_primary(cpu_id);
 
-    axlog2::init();
-    axlog2::set_max_level("debug");
+    axlog2::init("debug");
     info!("[rt_mutex]: ...");
 
     let start = align_up_4k(virt_to_phys(_ekernel as usize));
     let end = align_down_4k(axconfig::PHYS_MEMORY_END);
     axalloc::global_init(phys_to_virt(start), end - start);
 
-    let ctx = Arc::new(taskctx::init_sched_info());
-    unsafe {
-        let ptr = Arc::into_raw(ctx.clone());
-        axhal::cpu::set_current_task_ptr(ptr);
-    }
-
-    run_queue::init();
+    run_queue::init(cpu_id, dtb_pa);
 
     {
         let mutex: Mutex<u32> = Mutex::new(0);
         // Todo: do some tests according tests below.
+        info!("{}", *mutex.lock());
     }
 
     info!("[rt_mutex]: ok!");
     axhal::misc::terminate();
 }
 
+#[panic_handler]
 pub fn panic(info: &PanicInfo) -> ! {
     error!("{}", info);
     arch_boot::panic(info)

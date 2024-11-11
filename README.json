@@ -1,0 +1,11 @@
+{
+  "name": "mutex",
+  "description": "Mutex used in Monolithic Kernel.",
+  "authors": [{
+    "name": "Shi Lei",
+    "email": "shi_lei@massclouds.com"
+  }],
+  "keywords": ["mutex", "monolithic"],
+  "repo": "shilei-massclouds/mutex",
+  "doc_url": "https://github.com/shilei-massclouds/mutex/blob/main/README.md"
+}
